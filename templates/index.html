@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Home - My TODO List{% endblock %}
+
+{% block content %}
+
+<div class="d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center justify-content-center">
+    <div class="card shadow-sm p-4 w-50">
+        <form action="{{ url_for('home') }}" method="POST">
+            <div class="mb-3">
+                <label for="taskName" class="form-label font-weight-bold">Task Name</label>
+                <input type="text" class="form-control" id="taskName" name="task" placeholder="What needs to be done?">
+            </div>
+            <div class="mb-3">
+                <label class="form-label d-block">Select Priority:</label>
+                <div class="btn-group w-100" role="group">
+                    <input type="radio" class="btn-check" name="priority" id="low" value="1" checked>
+                    <label class="btn btn-outline-primary" for="low">Low</label>
+
+                    <input type="radio" class="btn-check" name="priority" id="medium" value="2">
+                    <label class="btn btn-outline-warning" for="medium">Medium</label>
+
+                    <input type="radio" class="btn-check" name="priority" id="high" value="3">
+                    <label class="btn btn-outline-danger" for="high">High</label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success w-100">Add Task</button>
+        </form>
+    </div>
+</div>
+{% if tasks: %}
+<!--#part of the checkboxes-->
+<div class="d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center justify-content-center">
+    <div class="list-group">
+        {% for task in tasks %}
+        <label class="list-group-item d-flex gap-3 align-items-center">
+            <input class="form-check-input flex-shrink-0"
+                   type="checkbox"
+                   style="font-size: 1.375em;"
+                   {% if task.is_completed %}checked{% endif %}
+                   onclick="window.location.href='/complete/{{ task.id }}'">
+
+            <span class="pt-1 form-checked-content">
+                <strong class="{% if task.is_completed %}text-decoration-line-through text-muted{% endif %}">
+                    {{ task.task_text }}
+                </strong>
+                <small class="d-block text-body-secondary">
+                    {{ task.date.strftime('%d-%m-%Y at %H:%M') }}
+                </small>
+            </span>
+            <span class="badge {% if task.priority == 3 %}bg-danger{% elif task.priority == 2 %}bg-warning text-dark{% else %}bg-info{% endif %} rounded-pill w-25">
+            {% if task.priority == 3: %}
+                High
+                {% elif task.priority == 2: %}
+                Medium
+                {% else: %}
+                Low
+                {% endif %}
+            </span>
+        </label>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+

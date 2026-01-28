@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Personal TODO{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+<header class="p-3 mb-3 border-bottom bg-dark text-white">
+    <div class="container">
+        <div
+                class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+        >
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li>
+                    <a href="#" class="nav-link px-2 text-white">Go to all lists</a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link px-2 text-white">List 1</a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link px-2 text-white">List 2</a>
+                </li>
+
+            </ul>
+            <div class="dropdown text-end text-white">
+                <a href="#" class="d-block text-decoration-none dropdown-toggle text-white" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img
+                            src="https://github.com/mdo.png"
+                            alt="mdo"
+                            width="32"
+                            height="32"
+                            class="rounded-circle"
+                    />
+                </a>
+                <ul class="dropdown-menu text-small">
+                    <li><a class="dropdown-item" href="#">Hey Igor!</a></li>
+                    <li><hr class="dropdown-divider"/></li>
+                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<main class="container mt-5">
+    {% block content %}
+    {% endblock %}
+</main>
+<footer></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+</html>
