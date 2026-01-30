@@ -3,21 +3,21 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}Personal TODO{% endblock %}</title>
+    <title>{% block title %}Personal task manager{% endblock %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 </head>
 <body>
 <header class="p-3 mb-3 border-bottom bg-dark text-white">
     <div class="container">
-        <div
-                class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
-        >
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li>
-                    <a href="{{ url_for('home') }}" class="nav-link px-2 text-white">Go to all lists</a>
-                </li>
+                {% if request.endpoint == 'selected_list' %}
+                <li><a href="{{ url_for('home') }}" class="nav-link px-2 text-white">Go to all lists</a></li>
+                {% endif %}
             </ul>
+            {% if is_logged %}
             <div class="dropdown text-end text-white">
                 <a href="#" class="d-block text-decoration-none dropdown-toggle text-white" data-bs-toggle="dropdown" aria-expanded="false">
                     <img
@@ -29,11 +29,12 @@
                     />
                 </a>
                 <ul class="dropdown-menu text-small">
-                    <li><a class="dropdown-item" href="#">Hey Igor!</a></li>
+                    <li><a class="dropdown-item" href="#">Hey! {{user.user_name}}</a></li>
                     <li><hr class="dropdown-divider"/></li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('logout') }}">Sign out</a></li>
                 </ul>
             </div>
+            {% endif %}
         </div>
     </div>
 </header>

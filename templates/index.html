@@ -4,6 +4,11 @@
 
 {% block content %}
 
+<div class="d-flex align-items-center p-3 my-3 text-white bg-dark rounded shadow-sm">
+    <h1>Hey {{user.user_name}}, welcome to your personal tasks manager :))</h1>
+</div>
+
+
 <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#newListModal">
     <i class="bi bi-plus-lg"></i> New List
 </button>
@@ -38,28 +43,17 @@
 <div class="d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center justify-content-center">
     <div class="list-group">
         {% for list in lists %}
-        <a
-                href="{{url_for('selected_list', list_id=list.id)}}"
-                class="list-group-item list-group-item-action d-flex gap-3 py-3"
-                aria-current="true"
-        >
-            <img
-                    src="https://github.com/twbs.png"
-                    alt=""
-                    width="32"
-                    height="32"
-                    class="rounded-circle flex-shrink-0"
-            />
+        <a href="{{url_for('selected_list', list_id=list.id)}}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+            <img src="https://github.com/twbs.png" alt="" width="32" height="32" class="rounded-circle flex-shrink-0"/>
             <div class="d-flex gap-2 w-100 justify-content-between">
                 <div>
                     <h6 class="mb-0">{{list.name}}</h6>
-                    <p class="mb-0 opacity-75">
-                        Some placeholder content in a paragraph.
-                    </p>
+                    <p class="mb-0 opacity-75">{{list.description}}</p>
                 </div>
-                <div class="vr border-danger border-3 opacity-100 mx-3"></div>
-                <small class="opacity-50 text-nowrap d-flex align-items-center">{{list.date_created.strftime('%d-%m-%Y
-                    at %H:%M')}}</small>
+                <div class="data-part d-flex gap-1">
+                    <div class="vr border-danger border-3 opacity-100 mx-3"></div>
+                    <small class="opacity-50 text-nowrap d-flex align-items-center">{{list.date_created.strftime('%d-%m-%Y at %H:%M')}}</small>
+                </div>
             </div>
         </a>
         {% endfor %}
